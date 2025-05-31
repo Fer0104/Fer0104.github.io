@@ -25,7 +25,7 @@
     }
         .logo-titulo h1 {
         margin: 0;
-        font-size: 40px;
+        font-size: 28px;
         color: #f7931e;
     }
          h2 {
@@ -40,7 +40,7 @@
         
  p {
         line-height: 1.6;
-        font-size: 25px;
+        font-size: 16px;
     }
 
  a {
@@ -90,34 +90,12 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        #zoomModal.show {
-    display: flex;
-    opacity: 1;
         }
         #zoomImg {
             max-width: 90%;
             max-height: 90%;
             border-radius: 10px;
-            box-shadow: 0 0 20px black;
-            animation: fadeIn 0.4s ease;
         }
-    @keyframes fadeIn {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-    body.blur {
-    filter: blur(5px);
-    transition: filter 0.3s ease;
-    pointer-events: none;
-}
-    #closeZoom:hover {
-    transform: scale(1.2);
-    color: #f7931e;
-    transition: transform 0.2s, color 0.2s;
-}
     </style>
     <title>SpeedForce</title>
 
@@ -193,41 +171,19 @@
         </table>
     </div>
     <div id="zoomModal"> 
-        <span id="closeZoom" style="position: absolute; top: 20px; right: 30px; font-size: 32px; color: white; cursor: pointer;">&times;</span>
         <img id="zoomImg" src="">
     </div>
     <script>
-           const zoomableImages = document.querySelectorAll('.zoomable');
-    const zoomModal = document.getElementById('zoomModal');
-    const zoomImg = document.getElementById('zoomImg');
-    const closeZoom = document.getElementById('closeZoom');
+        const zoomableImages = document.querySelectorAll('.zoomable');
+        const zoomModal = document.getElementById('zoomModal');
+        const zoomImg = document.getElementById('zoomImg');
 
-    zoomableImages.forEach(img => {
-        img.addEventListener('click', () => { 
-            zoomImg.src = img.src;
-            zoomModal.classList.add('show');
-            document.body.classList.add('blur');
+        zoomableImages.forEach(img => {
+            img.addEventListener('click',() => { 
+                zoomImg.src = img.src;
+                zoomModal.style.display = 'flex';
+            });
         });
-    });
-
-    zoomModal.addEventListener('click', (e) => {
-        if (e.target === zoomModal || e.target === closeZoom) {
-            zoomModal.classList.remove('show');
-            document.body.classList.remove('blur');
-            setTimeout(() => {
-                zoomModal.style.display = 'none'; 
-            }, 300);
-        }
-    });
-
-    const observer = new MutationObserver(() => {
-        if (zoomModal.classList.contains('show')) {
-            zoomModal.style.display = 'flex';
-        }
-    });
-
-    observer.observe(zoomModal, { attributes: true });
-
     </script>
 </body>
 </html>
