@@ -197,34 +197,37 @@
         <img id="zoomImg" src="">
     </div>
     <script>
-        const zoomableImages = document.querySelectorAll('.zoomable');
-        const zoomModal = document.getElementById('zoomModal');
-        const zoomImg = document.getElementById('zoomImg');
-        const closeZoom = document.getElementById('closeZoom');
+           const zoomableImages = document.querySelectorAll('.zoomable');
+    const zoomModal = document.getElementById('zoomModal');
+    const zoomImg = document.getElementById('zoomImg');
+    const closeZoom = document.getElementById('closeZoom');
 
+    zoomableImages.forEach(img => {
+        img.addEventListener('click', () => { 
+            zoomImg.src = img.src;
+            zoomModal.classList.add('show');
+            document.body.classList.add('blur');
+        });
+    });
 
-        zoomableImages.forEach(img => {
-            img.addEventListener('click',() => { 
-                zoomImg.src = img.src;
-                zoomModal.classList.add('show');
-                document.body.classList.add('blur');
-            });
-        });
-        zoomModal.addEventListener('click', (e) => {
-            if (e.target === zoomModal || e.target === closeZoom) {
-                zoomModal.classList.remove('show');
-                setTimeout(() => {
-                    zoomModal.style.display = 'none'; 
-                        }, 300);
-            }
-        });
-      
-        const observer = new MutationObserver(() => {
-            if (zoomModal.classList.contains('show')) {
-                zoomModal.style.display = 'flex';
+    zoomModal.addEventListener('click', (e) => {
+        if (e.target === zoomModal || e.target === closeZoom) {
+            zoomModal.classList.remove('show');
+            document.body.classList.remove('blur');
+            setTimeout(() => {
+                zoomModal.style.display = 'none'; 
+            }, 300);
         }
     });
+
+    const observer = new MutationObserver(() => {
+        if (zoomModal.classList.contains('show')) {
+            zoomModal.style.display = 'flex';
+        }
+    });
+
     observer.observe(zoomModal, { attributes: true });
+
     </script>
 </body>
 </html>
