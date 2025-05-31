@@ -90,6 +90,7 @@
             justify-content: center;
             align-items: center;
             z-index: 9999;
+            transition: opacity 0.3s ease;
         }
         #zoomImg {
             max-width: 90%;
@@ -183,6 +184,9 @@
                 zoomImg.src = img.src;
                 zoomModal.style.display = 'flex';
             });
+        });
+        zoomModal.addEventListener('click', () => {
+            zoomModal.style.display = 'none';
         });
     </script>
 </body>
