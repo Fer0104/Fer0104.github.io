@@ -81,6 +81,21 @@
         table, th, td {
             border: 1px solid black;
         }
+        #zoomModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        #zoomImg {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
     </style>
     <title>SpeedForce</title>
 
@@ -98,7 +113,7 @@
         lo convirtieron en protagonista de emocionantes escenas de drift. Además, ha sido un vehículo destacado en videojuegos 
         como <a target="_blank" href="https://www.gran-turismo.com/es/">"Gran Turismo"</a>, <a target="_blank" href="https://forza.net/">"Forza Motorsport"</a> y <a target="_blank" href="https://www.ea.com/es-es/games/need-for-speed">"Need for Speed"</a>, 
         permitiendo a los jugadores experimentar su potencia y personalización.</p>
-        <img src="https://i.pinimg.com/originals/9a/8c/b0/9a8cb0cc897758affac91cca03155fa9.jpg" width="300px"> <!-- Esta es la imagen del carro -->
+        <img class="zoomable" src="https://i.pinimg.com/originals/9a/8c/b0/9a8cb0cc897758affac91cca03155fa9.jpg" width="300px"> <!-- Esta es la imagen del carro -->
     </div> <!-- Para dividir las secciones -->
 
     <div>
@@ -107,9 +122,9 @@
         las posibilidades de modificación son casi infinitas. Marcas reconocidas como <a target="_blank" href="https://hksusa.com/category/subcategory/188">HKS</a>, <a target="_blank" href="https://www.greddy.com/products/17020350">GReddy</a> y <a target="_blank" href="https://voltexracing.com/nissan-350z-z33/">Voltex</a> ofrecen componentes que permiten 
         llevar este deportivo al siguiente nivel.</p> <!-- target _blank es para abrir el link en una nueva pagina -->
         
-        <img src="https://hksusa.com/_next/image?url=https%3A%2F%2Fcheerful-bouquet-91c8f27a22.media.strapiapp.com%2Fcat_15_01_48bf759faf.jpg&w=1080&q=75" width="300">
-        <img src="https://ltmotorwerks.com/cdn/shop/products/RB-Z33-9_1024x1024.jpg?v=1496355428" width="300">
-        <img src="https://voltexracing.com/wp-content/uploads/2024/07/7icoem3ev6za1.jpg" width="300">
+        <img class="zoomable" src="https://hksusa.com/_next/image?url=https%3A%2F%2Fcheerful-bouquet-91c8f27a22.media.strapiapp.com%2Fcat_15_01_48bf759faf.jpg&w=1080&q=75" width="300">
+        <img class="zoomable" src="https://ltmotorwerks.com/cdn/shop/products/RB-Z33-9_1024x1024.jpg?v=1496355428" width="300">
+        <img class="zoomable" src="https://voltexracing.com/wp-content/uploads/2024/07/7icoem3ev6za1.jpg" width="300">
     </div> <!-- Para dividir las secciones -->
 
     <div>
@@ -155,7 +170,20 @@
         
         </table>
     </div>
-    
+    <div id="zoomModal"> 
+        <img id="zoomImg" src="">
+    </div>
+    <script>
+        const zoomableImages = document.querySelectorAll('.zoomable');
+        const zoomModal = document.getElementById('zoomModal');
+        const zoomImg = document.getElementById('zoomImg');
 
+        zoomableImages.forEach(img => {
+            img.addEventListener('click',() => { 
+                zoomImg.src = img.src;
+                zoomModal.style.display = 'flex';
+            });
+        });
+    </script>
 </body>
 </html>
