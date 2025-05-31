@@ -108,6 +108,11 @@
     from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
+    body.blur {
+    filter: blur(5px);
+    transition: filter 0.3s ease;
+    pointer-events: none;
+}
     </style>
     <title>SpeedForce</title>
 
@@ -183,7 +188,7 @@
         </table>
     </div>
     <div id="zoomModal"> 
-        <span id="closeZoom" style="position: absolute; top: 20px; right: 30px; font-size: 32px; color: white; cursor: pointer;">&tems;<span>
+        <span id="closeZoom" style="position: absolute; top: 20px; right: 30px; font-size: 32px; color: white; cursor: pointer;">&times;</span>
         <img id="zoomImg" src="">
     </div>
     <script>
@@ -197,6 +202,7 @@
             img.addEventListener('click',() => { 
                 zoomImg.src = img.src;
                 zoomModal.classList.add('show');
+                document.body.classList.add('blur');
             });
         });
         zoomModal.addEventListener('click', (e) => {
@@ -205,10 +211,19 @@
                 setTimeout(() => zoomModal.style.display = 'none', 300);
         });
         const observer = new MutationObserver(() => {
+            if (e.target === zoomModal || e.target === closeZoom) {
+                zoomModal.classList.remove('show');
+                document.body.classList.remove('blur');
+                setTimeout(() => {
+                zoomModal.style.display = 'none';
+                }, 300);
+        }
+    });
+        const observer = new MutationObserver(() => {
             if (zoomModal.classList.contains('show')) {
                 zoomModal.style.display = 'flex';
         }
-    });
+        });
     observer.observe(zoomModal, { attributes: true });
     </script>
 </body>
