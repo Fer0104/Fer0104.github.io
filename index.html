@@ -113,6 +113,11 @@
     transition: filter 0.3s ease;
     pointer-events: none;
 }
+    #closeZoom:hover {
+    transform: scale(1.2);
+    color: #f7931e;
+    transition: transform 0.2s, color 0.2s;
+}
     </style>
     <title>SpeedForce</title>
 
@@ -208,22 +213,18 @@
         zoomModal.addEventListener('click', (e) => {
             if (e.target === zoomModal || e.target === closeZoom) {
                 zoomModal.classList.remove('show');
-                setTimeout(() => zoomModal.style.display = 'none', 300);
-        });
-        const observer = new MutationObserver(() => {
-            if (e.target === zoomModal || e.target === closeZoom) {
-                zoomModal.classList.remove('show');
-                document.body.classList.remove('blur');
                 setTimeout(() => {
-                zoomModal.style.display = 'none';
-                }, 300);
-        }
+                    zoomModal.style.display = 'none', 
+                        }, 300);
+            }
+        });
+      
     });
         const observer = new MutationObserver(() => {
             if (zoomModal.classList.contains('show')) {
                 zoomModal.style.display = 'flex';
         }
-        });
+    });
     observer.observe(zoomModal, { attributes: true });
     </script>
 </body>
