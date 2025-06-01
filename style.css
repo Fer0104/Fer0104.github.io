@@ -5,11 +5,16 @@
         background-color: #2b2b2b;
         color: #ffffff;
     }
-        .encabezado {
-            padding: 20px;
-            background-color: #111;
-            border-bottom: 2px solid #444;
+         .logo-titulo {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        background-color: #111;
+        border-bottom: 2px solid #444;
+    }
 
+    }
         h1 {
         margin: 10px;
         font-size: 40px;
